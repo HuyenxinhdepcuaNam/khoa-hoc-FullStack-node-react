@@ -8,7 +8,7 @@ module.exports = {
       firstName: 'hidanIT',
       lastName: 'Eric',
       address: 'Ha Noi',
-      phonenumber: 'Ha Noi',
+      phonenumber: ' 0123456789',
       gender: '1',
       image: 'ROLE',
       roleId: 'R1',
