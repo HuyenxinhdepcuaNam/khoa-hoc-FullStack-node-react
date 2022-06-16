@@ -167,7 +167,7 @@ const bulkCreateSchedulle = (data) => {
                 })
                 console.log('check toCreate', toCreate)
                 if (toCreate && toCreate.length > 0) {
-                    return await db.Schedule.bulkCreate(toCreate)
+                    await db.Schedule.bulkCreate(toCreate)
                 }
                 resolve({
                     errCode: 0,
