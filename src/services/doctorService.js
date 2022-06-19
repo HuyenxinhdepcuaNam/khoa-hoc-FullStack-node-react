@@ -255,11 +255,45 @@ let getScheduleByDate = (doctorId, date) => {
     })
 }
 
+let getExtraInforById = (idInput) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            if (!idInput) {
+                resolve({
+                    errCode: 1,
+                    errMessage: 'Missing input!'
+                })
+            } else {
+                let data = await db.Doctor_Infor.findOne({
+                    where: { doctorId: idInput },
+                    include: [
+                        { model: db.Allcode, as: 'priceTypeData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'provinceTypeData', attributes: ['valueEn', 'valueVi'] },
+                        { model: db.Allcode, as: 'paymentTypeData', attributes: ['valueEn', 'valueVi'] }
+                    ],
+                    attributes: {
+                        exclude: ['id', 'doctorId']
+                    },
+                    raw: false,
+                    nest: true
+                })
+                if (!data) data = {}
+                resolve({
+                    errCode: 0,
+                    data: data
+                })
+            }
+        } catch (e) {
+            reject(e)
+        }
+    })
+}
+
 module.exports = {
     getTopDoctorHomeService: getTopDoctorHomeService,
     getAllDoctors: getAllDoctors,
     saveDetailInfoDoctor: saveDetailInfoDoctor,
     getDetailDoctorById: getDetailDoctorById,
     bulkCreateSchedulle,
-    getScheduleByDate,
+    getScheduleByDate, getExtraInforById,
 }
