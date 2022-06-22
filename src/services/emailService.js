@@ -27,7 +27,7 @@ let sendSimpleEmail = async (dataSend) => {
 let getBodyHTMLEmail = (dataSend) => {
     let result = ''
     if (dataSend.language === 'vi') {
-        let result =
+        result =
             `
         <h3>Xin chào ${dataSend.patientName}</h3>
         <p>Thông tin đặt lịch khám bệnh:</p>
@@ -41,7 +41,7 @@ let getBodyHTMLEmail = (dataSend) => {
         `
     }
     if (dataSend.language === 'en') {
-        let result =
+        result =
             `
         <h3>Dear ${dataSend.patientName}</h3>
         <p>Booking information:</p>
@@ -53,6 +53,7 @@ let getBodyHTMLEmail = (dataSend) => {
         </div>
         
         `
+
     }
     return result
 }
