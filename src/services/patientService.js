@@ -5,7 +5,8 @@ import emailService from './emailService'
 let postBookAppoinment = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            if (!data.email || !data.doctorId || !data.timeType || !data.date) {
+            if (!data.email || !data.doctorId || !data.timeType || !data.date
+                || !data.fullName) {
                 resolve({
                     errCode: 1,
                     errMessage: 'Missing input!'
@@ -15,8 +16,9 @@ let postBookAppoinment = (data) => {
                 await emailService.sendSimpleEmail({
                     receiverEmail: data.email,
                     patientName: data.fullName,
-                    time: data.timeType,
-                    doctorName: data.fullName,
+                    time: data.timeString,
+                    doctorName: data.doctorName,
+                    language: data.language,
                     rediirectLink: ''
                 })
 

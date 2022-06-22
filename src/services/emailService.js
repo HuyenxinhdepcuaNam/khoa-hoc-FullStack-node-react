@@ -19,7 +19,15 @@ let sendSimpleEmail = async (dataSend) => {
         to: dataSend.receiverEmail, // list of receivers
         subject: "Thông tin đặt lịch khám bệnh ✔", // Subject line
         // text: "Hello world?", // plain text body
-        html: // html body
+        html: getBodyHTMLEmail(dataSend) // html body
+
+    });
+}
+
+let getBodyHTMLEmail = (dataSend) => {
+    let result = ''
+    if (dataSend.language === 'vi') {
+        let result =
             `
         <h3>Xin chào ${dataSend.patientName}</h3>
         <p>Thông tin đặt lịch khám bệnh:</p>
@@ -30,8 +38,23 @@ let sendSimpleEmail = async (dataSend) => {
         <a href =  ${dataSend.rediirectLink} target = "_blank">Click here</a>
         </div>
         
-        `,
-    });
+        `
+    }
+    if (dataSend.language === 'en') {
+        let result =
+            `
+        <h3>Dear ${dataSend.patientName}</h3>
+        <p>Booking information:</p>
+        <div>Time: ${dataSend.time}</div>
+        <div>Doctor: ${dataSend.doctorName}</div>
+        <p>Confirm and complete!</p>
+        <div>
+        <a href =  ${dataSend.rediirectLink} target = "_blank">Click here</a>
+        </div>
+        
+        `
+    }
+    return result
 }
 
 module.exports = {
