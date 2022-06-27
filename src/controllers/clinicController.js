@@ -13,6 +13,32 @@ let createClinic = async (req, res) => {
     }
 }
 
+let getAllClinic = async (req, res) => {
+    try {
+        let infor = await clinicService.getAllClinic()
+        res.status(200).json(infor)
+    } catch (e) {
+        console.log(e)
+        res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error form server...'
+        })
+    }
+}
+
+let getDetialClinicyById = async (req, res) => {
+    try {
+        let infor = await clinicService.getDetialClinicyById(req.query.id)
+        res.status(200).json(infor)
+    } catch (e) {
+        console.log(e)
+        res.status(200).json({
+            errCode: -1,
+            errMessage: 'Error form server...'
+        })
+    }
+}
+
 module.exports = {
-    createClinic,
+    createClinic, getAllClinic, getDetialClinicyById
 }
